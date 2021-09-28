@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+Cart
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="content row">
+
+        {% if items %}
+        <div class="col-sm-6">
+            <span class="display-4">Cart Items</span>
+            <hr>
+            {% for i in items %}
+            <div class="row  shadow border m-3">
+                <div class="col-sm-3 my-1 ">
+                    <a href="{{i.product.get_url}}"><img src="{{i.product.image.url}}" class="img img-fluid" height="100px" alt="">
+                    </a>
+                </div>
+                <div class="col-sm border pt-2  ">
+                    <div class="shadow rounded">
+                        <span class="fw-light fs-4 px-2   text-justify">
+                            {{i.product}}
+                        </span>
+                    </div>
+                    <hr>
+                    <div class="small">
+                        <small>{{i.product.title}}</small>
+                    </div>
+                    <div class="">
+                        Price per unit :
+                        <span class="fw-bold">
+                            {{i.product.price}}
+                        </span>
+                    </div>
+                    <div>
+                        $
+                        <span class="fe-light fs-4">{{i.sub_total}}</span>
+                    </div>
+                    <div class="">
+                        <span class="text-danger">
+                            Stock left:{{i.product.stock}}
+                        </span>
+                    </div>
+                    <hr class="w-50">
+                    <!-- quantity management -->
+                    <div class="">
+                        <span class="fw-bold">
+                            {% if i.quantity < i.product.stock %} <a href="{% url 'cart:cartminus' i.product.id %}"
+                                class="btn mx-1"><i class="fa fa-circle-minus"></i></a>
+                                {{i.quantity}}
+                                <a href="{%url 'cart:addcart' i.product.id %}" class="btn mx-1">
+                                    <i class="fa fa-circle-plus"></i>
+                                </a>
+                                <a href="{% url 'cart:remove_item' i.product.id %}" class="btn"><i
+                                        class="fa fa-trash"></i></a>
+                                {% else %}
+                                <a href="{% url 'cart:cartminus' i.product.id %}" class="btn mx-1"><i
+                                        class="fa fa-circle-minus"></i></a>
+                                {{i.quantity}}
+                                <a href="{%url 'cart:addcart' i.product.id %}" class="btn disabled mx-1">
+                                    <i class="fa fa-circle-plus"></i>
+                                </a>
+                                <a href="{% url 'cart:remove_item' i.product.id %}" class="btn"><i
+                                        class="fa fa-trash"></i></a>
+                                {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-sm-6  ">
+            <div class="text-left bg-dark text-center  text-white m-5 p-4">
+                <span class="fs-4">Checkout</span><br>
+                <hr>
+                <span class="lead">Please review your shopping cart items before making payment</span>
+                <hr class="mx-5">
+                <div class="preview  my-5">
+                    <span class="fs-4">Your total is : </span><span class="fs-4 fw-bold">{{total}}</span>
+                </div>
+            </div>
+          
+        </div>
+
+        {% else %}
+        <div class="shadow my-5">
+           <div class="text-center">
+            <span class="display-4 ">Your cart is empty</span>
+           </div>
+            <div class="my-5 text-center">
+                <a href="/" class=""><button class="btn btn-primary btn-lg">Shop Now</button></a>
+            </div>
+        </div>
+        {% endif %}
+
+
+    </div>
+</div>
+
+
+
+{% endblock %}

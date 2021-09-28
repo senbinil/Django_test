@@ -1,0 +1,45 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-4">
+    <div class="container-fluid">
+        <img src="{% static 'logo.jpg' %}" class="navbar-logo img-fluid m-1  rounded border-collapse" width="50px"
+            alt="">
+        <a href="/" class="navbar-brand">Shopin</a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcontent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navcontent" class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Category
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="nav-item">
+                            <a href="{% url 'shopin:allcat'  %}" class="dropdown-item ">All Category</a>
+                        </li>
+                        {% for i in links %}
+                        <li class="nav-item">
+
+                            <a href="{{i.get_url}}" class="dropdown-item">{{i.name}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/cart"><button type="button" class="btn btn-tansparent text-white position-relative">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{item_count}}
+                        </span></i>
+                    </button></a>
+                </li>
+            </ul>
+            <form class="d-flex" method="GET" action="{% url 'search_module:search' %}">
+                <input class="form-control me-2  border-collapse" type="search" name="search_key" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-outline-success bg-light " type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</nav>

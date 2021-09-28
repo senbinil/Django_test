@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{% if category %}
+{{category.name}}-Shopin
+{% else %}
+Shopin.com
+{% endif %}
+{% endblock %}
+{% block style %}
+<style>
+.banner{
+    background: #DC2424;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4A569D, #DC2424);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4A569D, #DC2424); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.card-img-top {
+    width: 100%;
+    height: 20vw;
+    object-fit:cover;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% if category %}
+<div class="container  shadow my-3">
+    <div>
+       <a href="{% url 'shopin:allcat' %}" class="nav-link">Product Collection</a>
+    </div>
+</div>
+{% endif %}
+<div class="container">
+    {% if category %}
+    <img  src="{{category.image.url}}" class="img-fluid rounded" alt="categoryegory">
+</div>
+<br>
+<div class="container shadow bg-dark text-white">
+    <h1 class="fw-light">{{category.name}}</h1>
+    <hr>
+    <p class="lead">{{category.title}}</p>
+    <hr>
+</div>
+{% else %}
+<div class="banner py-4 mt-2  text-center text-white">
+   <marquee behavior="scroll" direction="" scrollamount="15"> <span class="display-2  fw-light">SPECIAL WEEKEND SALE IS ON!</span></marquee>
+</div>
+<br>
+<h1 class="text-center bg-dark text-white shadow w-50">Our Product Collections</h1>
+<p class="text-white lead text-end bg-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi ullam obcaecategoryi earum minima aliquid quasi dignissimos architecto molestiae labore provident.</p>
+{% endif %}
+<!-- <hr class="py-1"> -->
+<div class="container ">
+    <div class="row  border">
+        {% for i in products.object_list %}
+            <div class="col-sm-12 col-md-4 my-2 product">
+                <div class="card h-100">
+                    <div class="card-img-top">
+                        <a href="{{i.get_url}}"><img src="{{i.image.url}}"  alt="{{i.name}}" class="card-img-top"></a>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{i.name}}</h4>
+                        <p class="card-text small">{{i.title}}</p>
+                        <p class=" btn btn-danger fw-bold text-white">$ {{i.price}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+        {% if products.paginator.num_pages >= 1 %}
+        {% for page in products.paginator.page_range %}
+            <a href="?page={{page}}" class="btn btn-light {% if products.number == page %} active text-white bg-danger {% endif %}">{{page}}</a>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

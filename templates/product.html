@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}
+{{product.name}}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-5">
+        <h3>{{product.name}}</h3>
+        <div class="col-sm-6">
+            <div class="">
+                <img src="{{product.image.url}}" class="img-fluid img-thumbnail shadow-lg" alt="{{product.name}}">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h4 align="right">Product Details</h4>
+            <hr class="my-3">
+            <div class="details row my-5">
+                <div class="col-sm-6 text-center">
+                    Product Description:
+                </div>
+                <div class="col-sm-6 text-center fw-bolder ">
+                    <p>{{product.title}}</p>
+                </div><hr class="my-2">
+                <div class="col-sm-6 text-center ">
+                    Price:
+                </div>
+                <div class="col-sm-6 text-center">
+                    <p class=" fs-3 fw-bold ">{{product.price}}</p>
+                </div><hr class="my-2">
+                <div class="text-end    fw-bold lead ">
+                    <span class="bg-warning text-white p-2 text-wrap"> Stock Left: <span class="fs-4">
+                        {{product.stock}}
+                    </span>
+                </span>
+                </div>
+                {% if product.stock <= 0 %} 
+                <div class="col-sm-6">
+                    <p class="fw-bolder text-center">Out Of Stock</p>
+                </div>
+                {% else %}
+                <div class="col-sm-12 col-md-12 text-center">
+                    <a href="{% url 'cart:addcart' product.id %} " class="btn btn-danger">Add to Cart</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

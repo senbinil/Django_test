@@ -1,0 +1,14 @@
+.super_div{
+    /* height: 100vh; */
+   margin-bottom: 500px;
+    
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+.nav-item {
+    letter-spacing: .2em;
+}
+.dropdown-item{
+    letter-spacing: .2em;
+}
