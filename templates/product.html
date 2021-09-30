@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container" style="height:100vh;">
     <div class="row my-5">
         <h3>{{product.name}}</h3>
         <div class="col-sm-6">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <h4 align="right">Product Details</h4>
+            <h4 align="right" class="py-3">Product Details</h4>
             <hr class="my-3">
             <div class="details row my-5">
                 <div class="col-sm-6 text-center">
@@ -39,11 +39,12 @@
                     <p class="fw-bolder text-center">Out Of Stock</p>
                 </div>
                 {% else %}
-                <div class="col-sm-12 col-md-12 text-center">
+                <div class="col-sm-12 col-md-12 my-5 text-center">
                     <a href="{% url 'cart:addcart' product.id %} " class="btn btn-danger">Add to Cart</a>
                 </div>
                 {% endif %}
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

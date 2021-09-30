@@ -33,7 +33,7 @@ background: linear-gradient(to right, #4A569D, #DC2424); /* W3C, IE 10+/ Edge, F
 {% endif %}
 <div class="container">
     {% if category %}
-    <img  src="{{category.image.url}}" class="img-fluid rounded" alt="categoryegory">
+    <img  src="{{category.image.url}}" class="img-fluid rounded" width="800"  alt="categoryegory">
 </div>
 <br>
 <div class="container shadow bg-dark text-white">
@@ -55,7 +55,7 @@ background: linear-gradient(to right, #4A569D, #DC2424); /* W3C, IE 10+/ Edge, F
     <div class="row  border">
         {% for i in products.object_list %}
             <div class="col-sm-12 col-md-4 my-2 product">
-                <div class="card h-100">
+                <div class="card ">
                     <div class="card-img-top">
                         <a href="{{i.get_url}}"><img src="{{i.image.url}}"  alt="{{i.name}}" class="card-img-top"></a>
                     </div>
@@ -75,5 +75,6 @@ background: linear-gradient(to right, #4A569D, #DC2424); /* W3C, IE 10+/ Edge, F
         {% endfor %}
         {% endif %}
     </div>
+</div>
 </div>
 {% endblock %}

@@ -5,7 +5,7 @@ Cart
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid" style="height: 100vh;">
     <div class="content row">
 
         {% if items %}
@@ -25,9 +25,6 @@ Cart
                         </span>
                     </div>
                     <hr>
-                    <div class="small">
-                        <small>{{i.product.title}}</small>
-                    </div>
                     <div class="">
                         Price per unit :
                         <span class="fw-bold">
@@ -81,7 +78,11 @@ Cart
                     <span class="fs-4">Your total is : </span><span class="fs-4 fw-bold">{{total}}</span>
                 </div>
             </div>
-          
+            <div class="text-center ">
+                <a href="/"><button class="btn btn-primary btn-lg">Continue Shopping</button></a>
+                <a href="/"><button class="btn btn-danger btn-lg">Procced</button></a>
+            </div>
+
         </div>
 
         {% else %}
